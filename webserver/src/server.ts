@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === undefined) {
 const app = express();
 
 // General Middleware
-app.use([ express.json(), requestLogger ]);
+app.use([ express.json(), requestLogger, validateCORS ]);
 
 // General Error Handling Middleware
 app.use([ serverErrorHandler ]);
