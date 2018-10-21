@@ -1,0 +1,19 @@
+{
+  "defaultEnv": { "ENV": "NODE_ENV" },
+
+  "development": {
+    "driver": "mysql",
+    "host": "localhost",
+    "user": "appSU",
+    "password": "appSUPassword",
+    "database": "project_catalogue"
+  },
+
+  "production": {
+    "driver": "mysql",
+    "host": { "ENV": "MARIADB_HOST" },
+    "user": { "ENV": "MARIADB_USER" },
+    "password": { "ENV": "MARIADB_PASSWORD" },
+    "database": { "ENV": "MARIADB_DATABASE" }
+  }
+}
