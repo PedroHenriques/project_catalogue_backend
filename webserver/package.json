@@ -11,7 +11,9 @@
     "watch": "npm run tsc -- -w",
     "prestart": "npm run build",
     "start": "node ./dist/server.js",
-    "start-watch": "nodemon -L --inspect=0.0.0.0:9229 ./dist/server.js"
+    "start-watch": "nodemon -L --inspect=0.0.0.0:9229 ./dist/server.js",
+    "migrations-dev": "db-migrate -e development",
+    "migrations-prod": "db-migrate -e production"
   },
   "author": "Pedro Henriques <pedro@pedrojhenriques.com> (http://pedrojhenriques.com)",
   "license": "MIT",
