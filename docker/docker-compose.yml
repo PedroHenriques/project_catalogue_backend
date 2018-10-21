@@ -1,0 +1,56 @@
+version: '3.7'
+
+services:
+  redis:
+    image: redis:4-alpine
+    container_name: "catalogue-redis-production"
+    restart: on-failure
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ../logs/redis/:/usr/local/etc/redis/logs/
+      - ../redis/:/usr/local/etc/redis/
+    networks:
+      - backend
+  
+  mariadb:
+    image: mariadb:10
+    container_name: "catalogue-mariadb-production"
+    restart: on-failure
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=TBD
+      - MYSQL_DATABASE=TBD
+      - MYSQL_USER=TBD
+      - MYSQL_PASSWORD=TBD
+
+  webserver:
+    init: true
+    container_name: "catalogue-webserver-production"
+    restart: on-failure
+    image: "TBD"
+    build:
+      context: ../webserver
+      dockerfile: ../docker/webserver/Dockerfile
+      args:
+        - NODE_ENV=production
+    depends_on:
+      - redis
+    volumes:
+      - ../logs/webserver/:/src/app/logs/
+      - ../frontend/:/src/app/frontend/
+    networks:
+      - backend
+    environment:
+      - NODE_ENV=production
+      - DEPLOY_STAGE=production
+      - PORT=8000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MAIL_HOST=TBD
+      - MAIL_PORT=TBD
+
+networks:
+  backend:

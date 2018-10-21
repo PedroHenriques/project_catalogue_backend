@@ -1,0 +1,73 @@
+version: '3.7'
+
+services:
+  redis:
+    image: redis:4-alpine
+    container_name: redis
+    restart: on-failure
+    ports:
+      - "6379:6379"
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ../redis/redis.dev.conf:/usr/local/etc/redis/redis.conf:ro
+    networks:
+      - backend
+  
+  mariadb:
+    image: mariadb:10
+    container_name: mariadb
+    restart: on-failure
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootPassword
+      - MYSQL_DATABASE=project_catalogue
+      - MYSQL_USER=appSU
+      - MYSQL_PASSWORD=appSUPassword
+  
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    restart: on-failure
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    logging:
+      driver: 'none'
+    networks:
+      - backend
+  
+  webserver:
+    init: true
+    container_name: webserver
+    restart: on-failure
+    build:
+      context: ../webserver
+      dockerfile: ../docker/webserver/Dockerfile-dev
+      args:
+        - NODE_ENV=development
+    depends_on:
+      - mariadb
+      - redis
+      - mailhog
+    ports:
+      - "8000:8000"
+      - "9229:9229"
+    command: nodemon -L --inspect=0.0.0.0:9229 ./dist/server.js
+    volumes:
+      - ../webserver:/src/app
+    networks:
+      - backend
+    environment:
+      - NODE_ENV=development
+      - DEPLOY_STAGE=local
+      - PORT=8000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MAIL_HOST=mailhog
+      - MAIL_PORT=1025
+
+networks:
+  backend:
