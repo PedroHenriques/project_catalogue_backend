@@ -1,5 +1,6 @@
 'use strict';
 import * as express from 'express';
+import serverErrorHandler from './middleware/serverErrorHandler';
 import logger from './services/Logger';
 
 if (process.env.NODE_ENV === undefined) {
