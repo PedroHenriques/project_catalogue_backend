@@ -9,6 +9,9 @@ if (process.env.NODE_ENV === undefined) {
 
 const app = express();
 
+// General Error Handling Middleware
+app.use([ serverErrorHandler ]);
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   logger.info({
