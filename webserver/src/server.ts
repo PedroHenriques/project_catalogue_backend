@@ -1,5 +1,6 @@
 'use strict';
 import * as express from 'express';
+import requestLogger from './middleware/requestLogger';
 import serverErrorHandler from './middleware/serverErrorHandler';
 import logger from './services/Logger';
 
