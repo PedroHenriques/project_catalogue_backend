@@ -10,6 +10,9 @@ if (process.env.NODE_ENV === undefined) {
 
 const app = express();
 
+// General Middleware
+app.use([ requestLogger ]);
+
 // General Error Handling Middleware
 app.use([ serverErrorHandler ]);
 
