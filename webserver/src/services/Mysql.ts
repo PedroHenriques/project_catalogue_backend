@@ -7,6 +7,11 @@ interface IQuery {
   bindValues?: (string | number | boolean | Date)[],
 }
 
+interface IRunQueryArgs {
+  query: IQuery
+  closeConnection: boolean,
+}
+
 export function runQuery(args: IQuery): Promise<any> {
   return(
     connect()
