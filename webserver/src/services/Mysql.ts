@@ -20,7 +20,7 @@ export function runSingleQuery(args: IRunSingleQueryArgs): Promise<any> {
         args.query.statement,
         args.query.bindValues,
         (error, results, fields) => {
-          if (args.closeConnection) { connection.end(); }
+          connection.end();
           if (error) { return(reject(error)); }
           return(resolve(results));
         }
