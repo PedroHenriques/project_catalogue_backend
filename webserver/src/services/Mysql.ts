@@ -8,7 +8,7 @@ interface IQuery {
   bindValues?: (string | number | boolean | Date)[]
 }
 
-export function runQuery(args: IQuery): Promise<IProperty[]> {
+export function runQuery(args: IQuery): Promise<any> {
   return(
     connect()
     .then(async (connection) => new Promise((resolve, reject) => {
