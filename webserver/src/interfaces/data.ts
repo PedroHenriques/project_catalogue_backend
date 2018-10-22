@@ -20,3 +20,10 @@ export interface IPropertyTable {
   typeId: number,
   countryId: number,
 }
+
+export interface IUsersPropertiesTable {
+  userId: number,
+  propertyId: number,
+  createdAt?: string,
+  updatedAt?: string,
+}
