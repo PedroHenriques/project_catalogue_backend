@@ -2,10 +2,10 @@
 import { Request, Response } from 'express';
 import * as SqlFacade from '../services/Mysql';
 import logger from '../services/Logger';
+import { Connection } from 'mysql';
 import {
   IProperty, IPropertyTable, IUsersPropertiesTable
 } from '../interfaces/data';
-import { Connection } from 'mysql';
 
 export default class PropertyHandler {
   public myProperties = async (
