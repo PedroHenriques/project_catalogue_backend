@@ -8,14 +8,21 @@ export default class PropertyHandler {
     try {
       const userId = '1';
 
+      const statement: string = `
+        SELECT p.title, p.numberOfBeds, p.address, p.geoLocation,
+        p.description, pt.name as propertyType, c.name as country
+        FROM properties as p
+        LEFT JOIN usersProperties as up ON up.propertyId=p.id AND up.userId=?
+        LEFT JOIN propertyTypes as pt ON pt.id=p.typeId
+        LEFT JOIN countries as c ON c.id=p.countryId
+      `;
+
       const properties = await runQuery({
-        statement: `SELECT p.title, p.numberOfBeds, p.address, p.geoLocation,
-          p.description, pt.name as propertyType, c.name as country
-          FROM properties as p
-          LEFT JOIN usersProperties as up ON up.propertyId=p.id AND up.userId=?
-          LEFT JOIN propertyTypes as pt ON pt.id=p.typeId
-          LEFT JOIN countries as c ON c.id=p.countryId`,
-        bindValues: [ userId ],
+        query: {
+          statement,
+          bindValues: [ userId ],
+        },
+        closeConnection: true,
       }) as IProperty[];
 
       return(res.status(200).json({ properties }));
