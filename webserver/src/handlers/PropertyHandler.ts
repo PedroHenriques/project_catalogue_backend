@@ -8,7 +8,9 @@ import {
 import { Connection } from 'mysql';
 
 export default class PropertyHandler {
-  public findAll = async (req: Request, res: Response): Promise<Response> => {
+  public myProperties = async (
+    req: Request, res: Response
+  ): Promise<Response> => {
     try {
       const userId = '1';
 
