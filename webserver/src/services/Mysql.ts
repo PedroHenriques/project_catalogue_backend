@@ -12,7 +12,7 @@ interface IRunQueryArgs {
   closeConnection: boolean,
 }
 
-export function runQuery(args: IQuery): Promise<any> {
+export function runQuery(args: IRunQueryArgs): Promise<any> {
   return(
     connect()
     .then(async (connection) => new Promise((resolve, reject) => {
