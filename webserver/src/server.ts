@@ -15,6 +15,9 @@ const app = express();
 // General Middleware
 app.use([ express.json(), requestLogger, validateCORS ]);
 
+// Routers
+app.use('/api/v1', v1Router);
+
 // General Error Handling Middleware
 app.use([ serverErrorHandler ]);
 
