@@ -41,6 +41,36 @@ export default class PropertyHandler {
     }
   }
 
+  public findAll = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const statement: string = `
+        SELECT p.title, p.numberOfBeds, p.address, p.geoLocation,
+        p.description, pt.name as propertyType, c.name as country
+        FROM properties as p
+        LEFT JOIN usersProperties as up ON up.propertyId=p.id
+        LEFT JOIN propertyTypes as pt ON pt.id=p.typeId
+        LEFT JOIN countries as c ON c.id=p.countryId
+      `;
+
+      const properties = await SqlFacade.runSingleQuery({
+        query: {
+          statement,
+        },
+      }) as IProperty[];
+
+      return(res.status(200).json({ properties }));
+    } catch (error) {
+      logger.error({
+        message: error.message,
+        payload: error,
+      });
+
+      return(res.status(500).json({
+        error: 'Could not handle the request.',
+      }));
+    }
+  }
+
   public create = async (req: Request, res: Response): Promise<Response> => {
     let dbConnection: Connection | undefined;
     try {
