@@ -7,7 +7,7 @@ interface IQuery {
   bindValues?: (string | number | boolean | Date)[],
 }
 
-interface IRunQueryArgs {
+interface IRunSingleQueryArgs {
   query: IQuery
   closeConnection: boolean,
 }
