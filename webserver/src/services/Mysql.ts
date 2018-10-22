@@ -39,7 +39,7 @@ export function runSingleQuery(args: IRunSingleQueryArgs): Promise<any> {
   );
 }
 
-function connect(): Promise<Connection> {
+export function connect(): Promise<Connection> {
   return(new Promise((resolve, reject) => {
     const conObject = createConnection({
       host: process.env.MARIADB_HOST || 'localhost',
