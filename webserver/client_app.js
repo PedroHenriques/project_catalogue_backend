@@ -20,3 +20,28 @@ module.exports.getAllProperties = () => {
     console.error(error);
   });
 }
+
+module.exports.createProperty = (
+  title, numberOfBeds, address, geoLocation, description, typeId, countryId
+) => {
+  const payload = {
+    title, numberOfBeds, address, geoLocation, description, typeId, countryId
+  };
+
+  fetch(`${serverURL}api/v1/properties`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify(payload),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) { throw data.error; }
+
+    console.log('Property created!');
+  })
+  .catch(error => {
+    console.error(error);
+  });
+}
