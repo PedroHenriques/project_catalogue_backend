@@ -58,7 +58,7 @@ export function connect(): Promise<Connection> {
   }));
 }
 
-function query(connection: Connection, queryData: IQuery): Promise<any> {
+export function query(connection: Connection, queryData: IQuery): Promise<any> {
   return(new Promise((resolve, reject) => {
     connection.query(
       queryData.statement,
