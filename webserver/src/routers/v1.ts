@@ -6,4 +6,6 @@ const router = Router();
 
 const propertyHandler = new PropertyHandler();
 
+router.get('/properties', propertyHandler.findAll);
+
 export default router;
