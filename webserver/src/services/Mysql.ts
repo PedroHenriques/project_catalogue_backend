@@ -15,18 +15,20 @@ interface IRunSingleQueryArgs {
 export function runSingleQuery(args: IRunSingleQueryArgs): Promise<any> {
   return(
     connect()
-    .then(async (connection) => new Promise((resolve, reject) => {
-      connection.query(
-        args.query.statement,
-        args.query.bindValues,
-        (error, results, fields) => {
-          connection.end();
-          if (error) { return(reject(error)); }
-          return(resolve(results));
-        }
-      );
+    .then((connection) => new Promise(async (resolve, reject) => {
+      try {
+        resolve(await query(connection, args.query));
+      } catch (error) {
+        logger.error({
+          message: error.message,
+          payload: error,
+        });
+
+        reject(error);
+      } finally {
+        connection.end();
+      }
     }))
-    .then(result => result)
     .catch(error => {
       logger.error({
         message: error.message,
