@@ -9,7 +9,6 @@ interface IQuery {
 
 interface IRunSingleQueryArgs {
   query: IQuery
-  closeConnection: boolean,
 }
 
 export function runSingleQuery(args: IRunSingleQueryArgs): Promise<any> {
