@@ -3,6 +3,7 @@ import * as express from 'express';
 import requestLogger from './middleware/requestLogger';
 import validateCORS from './middleware/validateCORS';
 import serverErrorHandler from './middleware/serverErrorHandler';
+import v1Router from './routers/v1';
 import logger from './services/Logger';
 
 if (process.env.NODE_ENV === undefined) {
