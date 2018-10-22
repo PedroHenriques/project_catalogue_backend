@@ -17,8 +17,8 @@ export function runQuery(args: IRunQueryArgs): Promise<any> {
     connect()
     .then(async (connection) => new Promise((resolve, reject) => {
       connection.query(
-        args.statement,
-        args.bindValues,
+        args.query.statement,
+        args.query.bindValues,
         (error, results, fields) => {
           connection.end();
           if (error) { return(reject(error)); }
