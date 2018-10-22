@@ -1,7 +1,11 @@
 'use strict';
 import { Request, Response } from 'express';
-import { runSingleQuery } from '../services/Mysql';
-import { IProperty } from '../interfaces/data';
+import * as SqlFacade from '../services/Mysql';
+import logger from '../services/Logger';
+import {
+  IProperty, IPropertyTable, IUsersPropertiesTable
+} from '../interfaces/data';
+import { Connection } from 'mysql';
 
 export default class PropertyHandler {
   public findAll = async (req: Request, res: Response): Promise<Response> => {
