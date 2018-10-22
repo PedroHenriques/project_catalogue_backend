@@ -4,7 +4,7 @@ import logger from '../services/Logger';
 
 interface IQuery {
   statement: string,
-  bindValues?: (string | number | boolean | Date)[]
+  bindValues?: (string | number | boolean | Date)[],
 }
 
 export function runQuery(args: IQuery): Promise<any> {
