@@ -22,9 +22,7 @@ export function runQuery(args: IQuery): Promise<any> {
         }
       );
     }))
-    .then(result => {
-      return(result as IProperty[]);
-    })
+    .then(result => result)
     .catch(error => {
       logger.error({
         message: error.message,
