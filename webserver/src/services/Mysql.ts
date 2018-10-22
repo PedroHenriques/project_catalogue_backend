@@ -1,7 +1,6 @@
 'use strict';
 import { createConnection, Connection } from 'mysql';
 import logger from '../services/Logger';
-import { IProperty } from '../interfaces/data';
 
 interface IQuery {
   statement: string,
