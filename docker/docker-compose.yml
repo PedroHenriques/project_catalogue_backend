@@ -49,6 +49,11 @@ services:
       - PORT=8000
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - MARIADB_HOST=TBD
+      - MARIADB_PORT=TBD
+      - MARIADB_DATABASE=TBD
+      - MARIADB_USER=TBD
+      - MARIADB_PASSWORD=TBD
       - MAIL_HOST=TBD
       - MAIL_PORT=TBD
 
