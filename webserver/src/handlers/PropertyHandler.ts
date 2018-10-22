@@ -21,7 +21,7 @@ export default class PropertyHandler {
         LEFT JOIN countries as c ON c.id=p.countryId
       `;
 
-      const properties = await runSingleQuery({
+      const properties = await SqlFacade.runSingleQuery({
         query: {
           statement,
           bindValues: [ userId ],
