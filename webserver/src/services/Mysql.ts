@@ -56,3 +56,16 @@ function connect(): Promise<Connection> {
     });
   }));
 }
+
+function query(connection: Connection, queryData: IQuery): Promise<any> {
+  return(new Promise((resolve, reject) => {
+    connection.query(
+      queryData.statement,
+      queryData.bindValues,
+      (error, results, fields) => {
+        if (error) { return(reject(error)); }
+        return(resolve(results));
+      }
+    );
+  }));
+}
