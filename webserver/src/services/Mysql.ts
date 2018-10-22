@@ -20,7 +20,7 @@ export function runQuery(args: IRunQueryArgs): Promise<any> {
         args.query.statement,
         args.query.bindValues,
         (error, results, fields) => {
-          connection.end();
+          if (args.closeConnection) { connection.end(); }
           if (error) { return(reject(error)); }
           return(resolve(results));
         }
