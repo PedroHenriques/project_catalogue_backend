@@ -9,3 +9,14 @@ export interface IProperty {
   propertyType: string,
   country: string,
 }
+
+export interface IPropertyTable {
+  id?: number,
+  title: string,
+  numberOfBeds: number,
+  address: string,
+  geoLocation: number,
+  description: string | null,
+  typeId: number,
+  countryId: number,
+}
