@@ -1,6 +1,6 @@
 'use strict';
 import { Request, Response } from 'express';
-import { runQuery } from '../services/Mysql';
+import { runSingleQuery } from '../services/Mysql';
 import { IProperty } from '../interfaces/data';
 
 export default class PropertyHandler {
@@ -17,12 +17,11 @@ export default class PropertyHandler {
         LEFT JOIN countries as c ON c.id=p.countryId
       `;
 
-      const properties = await runQuery({
+      const properties = await runSingleQuery({
         query: {
           statement,
           bindValues: [ userId ],
         },
-        closeConnection: true,
       }) as IProperty[];
 
       return(res.status(200).json({ properties }));
