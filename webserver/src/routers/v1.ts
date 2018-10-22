@@ -8,5 +8,6 @@ const propertyHandler = new PropertyHandler();
 
 router.get('/properties', propertyHandler.findAll);
 router.post('/properties', propertyHandler.create);
+router.get('/users/properties', propertyHandler.myProperties);
 
 export default router;
