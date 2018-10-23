@@ -8,3 +8,11 @@ export interface IMessage {
 export interface ILogMessage extends IMessage {
   level: 'error' | 'warn' | 'info' | 'debug',
 }
+
+export interface IFilesToWatch {
+  [key: string]: {
+    path: string,
+    lastModified: number,
+    persistKey: string,
+  }
+}
