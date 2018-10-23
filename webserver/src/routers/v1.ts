@@ -2,6 +2,7 @@
 import { Router } from 'express';
 import * as cookieParser from 'cookie-parser';
 import session from '../middleware/session';
+import authenticatedStatus from '../middleware/validateAuthenticatedStatus';
 import PropertyHandler from '../handlers/PropertyHandler';
 
 const router = Router();
