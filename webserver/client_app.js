@@ -63,3 +63,118 @@ module.exports.createProperty = (
     console.error(error);
   });
 }
+
+module.exports.createUser = (email, password, name) => {
+  const payload = {
+    email, password, name
+  };
+
+  fetch(`${serverURL}api/v1/users`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify(payload),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) { throw data.error; }
+
+    console.log('User created!');
+  })
+  .catch(error => {
+    console.error(error);
+  });
+}
+
+module.exports.activateUser = (email, token) => {
+  const payload = {
+    email, token
+  };
+
+  fetch(`${serverURL}api/v1/user/activate`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify(payload),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) { throw data.error; }
+
+    console.log('User account activated!');
+  })
+  .catch(error => {
+    console.error(error);
+  });
+}
+
+module.exports.lostPassword = (email) => {
+  const payload = {
+    email
+  };
+
+  fetch(`${serverURL}api/v1/user/lostPw`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify(payload),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) { throw data.error; }
+
+    console.log('User account lost password started!');
+  })
+  .catch(error => {
+    console.error(error);
+  });
+}
+
+module.exports.resetPassword = (email, token, password) => {
+  const payload = {
+    email, token, password
+  };
+
+  fetch(`${serverURL}api/v1/user/pwReset`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify(payload),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) { throw data.error; }
+
+    console.log('User account password reseted!');
+  })
+  .catch(error => {
+    console.error(error);
+  });
+}
+
+module.exports.login = (email, password) => {
+  const payload = {
+    email, password
+  };
+
+  fetch(`${serverURL}api/v1/login`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify(payload),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) { throw data.error; }
+
+    console.log('logged in!');
+  })
+  .catch(error => {
+    console.error(error);
+  });
+}
