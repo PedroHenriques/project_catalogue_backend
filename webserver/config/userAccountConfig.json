@@ -1,0 +1,71 @@
+{
+  "domain": {
+    "localRootUrl": "http://localhost:8000/"
+  },
+
+  "accountRegistration": {
+    "tokenDurationInSeconds": 86400,
+
+    "email": {
+      "from": {
+        "name": "project_catalogue",
+        "address": "project@catalogue.com"
+      },
+
+      "subject": "Project Catalogue - Account Activation",
+
+      "body": {
+        "plain": "Thank you for registering an account on our platform.\n\nYou are 1 step away from being able to start using our application.\n\nTo activate your account please click on the link below:\n\n|!ACTIVATION_URL!|\n\nProject Catalogue.",
+
+        "html": "<p>Thank you for registering an account on our platform.</p><p>You are 1 step away from being able to start using our application.</p><p>To activate your account please click on the link below:</p><p><a href='|!ACTIVATION_URL!|' target='_blank'>|!ACTIVATION_URL!|</a></p><p>Project Catalogue.</p>"
+      }
+    },
+
+    "activationRelUrl": "activation/"
+  },
+
+  "accountActivation": {
+    "email": {
+      "from": {
+        "name": "project_catalogue",
+        "address": "project@catalogue.com"
+      },
+
+      "subject": "Project Catalogue - Account Successfully Activated",
+
+      "body": {
+        "plain": "Your account is now activate and you are ready to start using our application.\n\nTo login please visit the following link |!LOGIN_URL!|.\n\nProject Catalogue.",
+
+        "html": "<p>Your account is now activate and you are ready to start using our application.</p><p>To login please visit the following link <a href='|!LOGIN_URL!|' target='_blank'>|!LOGIN_URL!|</a>.</p><p>Project Catalogue.</p>"
+      }
+    },
+
+    "loginRelUrl": "login/"
+  },
+
+  "login": {
+    "sessionDurationInSeconds": 21600,
+    "cookieName": "session"
+  },
+
+  "lostPassword": {
+    "tokenDurationInSeconds": 3600,
+
+    "email": {
+      "from": {
+        "name": "project_catalogue",
+        "address": "project@catalogue.com"
+      },
+
+      "subject": "Project Catalogue - Password Recovery",
+
+      "body": {
+        "plain": "This email was sent because a password recovery was requested for your account.\n\nIf you did not make that request then no further action is required.\n\nTo set a new password for your account please visit the link below:\n\n|!PW_RESET_URL!|\n\nProject Catalogue.",
+
+        "html": "<p>This email was sent because a password recovery was requested for your account.</p><p>If you did not make that request then no further action is required.</p><p>To set a new password for your account please visit the link below:</p><p><a href='|!PW_RESET_URL!|' target='_blank'>|!PW_RESET_URL!|</a></p><p>Project Catalogue.</p>"
+      }
+    },
+
+    "pwResetRelUrl": "pwReset/"
+  }
+}
