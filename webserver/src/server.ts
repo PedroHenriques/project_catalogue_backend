@@ -1,10 +1,13 @@
 'use strict';
 import * as express from 'express';
+import { join } from 'path';
 import requestLogger from './middleware/requestLogger';
 import validateCORS from './middleware/validateCORS';
 import serverErrorHandler from './middleware/serverErrorHandler';
 import v1Router from './routers/v1';
 import logger from './services/Logger';
+import FileLoader from './services/FileLoader';
+import cacheKeyGenerator from './services/CacheKeyGenerator';
 
 if (process.env.NODE_ENV === undefined) {
   process.env.NODE_ENV = 'production';
