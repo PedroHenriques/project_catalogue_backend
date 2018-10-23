@@ -1,5 +1,9 @@
 'use strict';
 
+export interface ISession {
+  userId: string,
+}
+
 export interface ISessionData {
   userId: string,
   createdAt: number,
