@@ -13,6 +13,16 @@ if (process.env.NODE_ENV === undefined) {
   process.env.NODE_ENV = 'production';
 }
 
+const fileLoader = new FileLoader({
+  filesToWatch: {
+    userAccountConfig: {
+      path: join('.', 'config', 'userAccountConfig.json'),
+      lastModified: -1,
+      persistKey: cacheKeyGenerator.userAccountConfig(),
+    },
+  },
+});
+
 const app = express();
 
 // General Middleware
