@@ -61,6 +61,12 @@ export interface IUserAccountConfig {
   },
 }
 
+export interface IUsersPendingActivation {
+  token: string,
+  pwHash: string,
+  name: string,
+}
+
 export interface IProperty {
   title: string,
   numberOfBeds: number,
