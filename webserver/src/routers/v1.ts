@@ -37,15 +37,15 @@ router.get(
   [ authenticatedStatus('notLoggedIn'), userHandler.logout]
 );
 router.post(
-  '/user/activate',
+  '/users/activate',
   [ authenticatedStatus('loggedIn'), userHandler.activate ]
 );
 router.post(
-  '/user/lostPw',
+  '/users/lostPw',
   [ authenticatedStatus('loggedIn'), userHandler.lostPassword ]
 );
 router.post(
-  '/user/pwReset',
+  '/users/pwReset',
   [ authenticatedStatus('loggedIn'), userHandler.passwordReset ]
 );
 
