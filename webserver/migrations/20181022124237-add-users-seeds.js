@@ -16,7 +16,7 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db) {
   return(db.runSql(
-    `INSERT INTO users (email,password,name) VALUES ('test@test.com','password','pedro henriques')`
+    `INSERT INTO users (email,password,name) VALUES ('test@test.com','$2a$10$bAQWPemkKxHLllXdk3ly/.QWAi.GtsFzRpkrPd7iCJA4Ek.N/f5Nu','pedro henriques')`
   ));
 };
 
