@@ -4,7 +4,7 @@ import * as SqlFacade from '../services/Mysql';
 import logger from '../services/Logger';
 import { Connection } from 'mysql';
 import {
-  IProperty, IPropertyTable, IUsersPropertiesTable
+  IProperty, IPropertyTableRow, IUsersPropertiesTable
 } from '../interfaces/data';
 
 export default class PropertyHandler {
@@ -89,7 +89,7 @@ export default class PropertyHandler {
           if (dbConnection === undefined) { return(reject()); }
 
           try {
-            const property: IPropertyTable = {
+            const property: IPropertyTableRow = {
               title: req.body.title,
               numberOfBeds: parseInt(req.body.numberOfBeds, 10),
               address: req.body.address,
