@@ -14,14 +14,6 @@ export const getCookie = (
   return(args.req.cookies[args.name]);
 };
 
-export const setCookie = (
-  args: { res: Response, name: string, value: string }
-): Response => args.res.cookie(args.name, args.value, cookieOptions());
-
-export const clearCookie = (
-  args: { res: Response, name: string }
-): Response => args.res.clearCookie(args.name, cookieOptions());
-
 const cookieOptions = (): CookieOptions => {
   const options: CookieOptions = {
     httpOnly: false,
@@ -33,3 +25,11 @@ const cookieOptions = (): CookieOptions => {
 
   return(options);
 };
+
+export const setCookie = (
+  args: { res: Response, name: string, value: string }
+): Response => args.res.cookie(args.name, args.value, cookieOptions());
+
+export const clearCookie = (
+  args: { res: Response, name: string }
+): Response => args.res.clearCookie(args.name, cookieOptions());
