@@ -6,6 +6,9 @@ import PropertyHandler from '../handlers/PropertyHandler';
 
 const router = Router();
 
+// Router Middleware
+router.use([ cookieParser(), session ]);
+
 const propertyHandler = new PropertyHandler();
 
 router.get('/properties', propertyHandler.findAll);
