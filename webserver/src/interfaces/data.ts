@@ -10,7 +10,7 @@ export interface IProperty {
   country: string,
 }
 
-export interface IPropertyTable {
+export interface IPropertyTableRow {
   id?: number,
   title: string,
   numberOfBeds: number,
