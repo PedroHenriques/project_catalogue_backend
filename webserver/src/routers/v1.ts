@@ -4,6 +4,7 @@ import * as cookieParser from 'cookie-parser';
 import session from '../middleware/session';
 import authenticatedStatus from '../middleware/validateAuthenticatedStatus';
 import PropertyHandler from '../handlers/PropertyHandler';
+import UserHandler from '../handlers/UserHandler';
 
 const router = Router();
 
