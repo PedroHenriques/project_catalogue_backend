@@ -16,3 +16,22 @@ export interface IFilesToWatch {
     persistKey: string,
   }
 }
+
+export interface IMailerSendArgs {
+  from: {
+    name: string,
+    address: string,
+  },
+  to: string,
+  subject: string,
+  body: {
+    plain: string,
+    html: string,
+    keywordReplacements: IEmailBodyReplacement[],
+  },
+}
+
+export interface IEmailBodyReplacement {
+  find: string,
+  replace: string,
+}
