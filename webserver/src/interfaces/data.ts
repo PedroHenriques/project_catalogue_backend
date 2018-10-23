@@ -1,5 +1,10 @@
 'use strict';
 
+export interface ISessionData {
+  userId: string,
+  createdAt: number,
+}
+
 export interface IUserAccountConfig {
   domain: { [key: string]: string },
   accountRegistration: {
