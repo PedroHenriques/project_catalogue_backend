@@ -71,6 +71,15 @@ export interface IPasswordsPendingReset {
   token: string,
 }
 
+export interface IUserTableRow {
+  id?: number,
+  email: string,
+  password: string,
+  name: string,
+  createdAt?: string,
+  updatedAt?: string,
+}
+
 export interface IProperty {
   title: string,
   numberOfBeds: number,
