@@ -24,4 +24,29 @@ router.get(
   [ authenticatedStatus('notLoggedIn'), propertyHandler.myProperties ]
 );
 
+router.post(
+  '/users',
+  [ authenticatedStatus('loggedIn'), userHandler.create ]
+);
+router.post(
+  '/login',
+  [ authenticatedStatus('loggedIn'), userHandler.login ]
+);
+router.get(
+  '/logout',
+  [ authenticatedStatus('notLoggedIn'), userHandler.logout]
+);
+router.post(
+  '/user/activate',
+  [ authenticatedStatus('loggedIn'), userHandler.activate ]
+);
+router.post(
+  '/user/lostPw',
+  [ authenticatedStatus('loggedIn'), userHandler.lostPassword ]
+);
+router.post(
+  '/user/pwReset',
+  [ authenticatedStatus('loggedIn'), userHandler.passwordReset ]
+);
+
 export default router;
