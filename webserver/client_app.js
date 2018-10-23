@@ -92,7 +92,7 @@ module.exports.activateUser = (email, token) => {
     email, token
   };
 
-  fetch(`${serverURL}api/v1/user/activate`, {
+  fetch(`${serverURL}api/v1/users/activate`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
@@ -115,7 +115,7 @@ module.exports.lostPassword = (email) => {
     email
   };
 
-  fetch(`${serverURL}api/v1/user/lostPw`, {
+  fetch(`${serverURL}api/v1/users/lostPw`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
@@ -138,7 +138,7 @@ module.exports.resetPassword = (email, token, password) => {
     email, token, password
   };
 
-  fetch(`${serverURL}api/v1/user/pwReset`, {
+  fetch(`${serverURL}api/v1/users/pwReset`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
