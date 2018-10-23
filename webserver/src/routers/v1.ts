@@ -12,6 +12,7 @@ const router = Router();
 router.use([ cookieParser(), session ]);
 
 const propertyHandler = new PropertyHandler();
+const userHandler = new UserHandler();
 
 router.get('/properties', propertyHandler.findAll);
 router.post(
