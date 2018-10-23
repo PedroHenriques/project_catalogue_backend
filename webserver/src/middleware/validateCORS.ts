@@ -12,7 +12,7 @@ export default function validateCORS(
   } else if (process.env.NODE_ENV === 'production') {
     // TODO: add the production domains to be allowed in
   }
-  
+
   const origin = req.headers.origin;
   if (
     origin && typeof origin === 'string' &&
