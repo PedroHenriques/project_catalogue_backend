@@ -13,7 +13,13 @@ router.use([ cookieParser(), session ]);
 const propertyHandler = new PropertyHandler();
 
 router.get('/properties', propertyHandler.findAll);
-router.post('/properties', propertyHandler.create);
-router.get('/users/properties', propertyHandler.myProperties);
+router.post(
+  '/properties',
+  [ authenticatedStatus('notLoggedIn'),  propertyHandler.create ]
+);
+router.get(
+  '/users/properties',
+  [ authenticatedStatus('notLoggedIn'), propertyHandler.myProperties ]
+);
 
 export default router;
