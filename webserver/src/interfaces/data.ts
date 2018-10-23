@@ -67,6 +67,10 @@ export interface IUsersPendingActivation {
   name: string,
 }
 
+export interface IPasswordsPendingReset {
+  token: string,
+}
+
 export interface IProperty {
   title: string,
   numberOfBeds: number,
