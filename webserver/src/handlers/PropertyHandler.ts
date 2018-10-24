@@ -18,7 +18,7 @@ export default class PropertyHandler {
       const userId = req.session.userId;
 
       const statement: string = `
-        SELECT p.title, p.numberOfBeds, p.address, p.geoLocation,
+        SELECT p.id, p.title, p.numberOfBeds, p.address, p.geoLocation,
         p.description, pt.name as propertyType, c.name as country
         FROM properties as p
         LEFT JOIN usersProperties as up ON up.propertyId=p.id AND up.userId=?
@@ -49,7 +49,7 @@ export default class PropertyHandler {
   public findAll = async (req: Request, res: Response): Promise<Response> => {
     try {
       const statement: string = `
-        SELECT p.title, p.numberOfBeds, p.address, p.geoLocation,
+        SELECT p.id, p.title, p.numberOfBeds, p.address, p.geoLocation,
         p.description, pt.name as propertyType, c.name as country
         FROM properties as p
         LEFT JOIN usersProperties as up ON up.propertyId=p.id
