@@ -81,6 +81,7 @@ export interface IUserTableRow {
 }
 
 export interface IProperty {
+  id: number,
   title: string,
   numberOfBeds: number,
   address: string,
