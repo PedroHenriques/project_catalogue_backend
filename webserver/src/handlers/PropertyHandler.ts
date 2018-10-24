@@ -18,8 +18,9 @@ export default class PropertyHandler {
       const userId = req.session.userId;
 
       const statement: string = `
-        SELECT p.id, p.title, p.numberOfBeds, p.address, p.geoLocation,
-        p.description, pt.name as propertyType, c.name as country
+        SELECT p.id, p.title, p.numberOfBeds, p.address, p.geoLocationLat,
+        p.geoLocationLong, p.description, pt.name as propertyType,
+        c.name as country
         FROM properties as p
         LEFT JOIN usersProperties as up ON up.propertyId=p.id AND up.userId=?
         LEFT JOIN propertyTypes as pt ON pt.id=p.typeId
@@ -49,8 +50,9 @@ export default class PropertyHandler {
   public findAll = async (req: Request, res: Response): Promise<Response> => {
     try {
       const statement: string = `
-        SELECT p.id, p.title, p.numberOfBeds, p.address, p.geoLocation,
-        p.description, pt.name as propertyType, c.name as country
+        SELECT p.id, p.title, p.numberOfBeds, p.address, p.geoLocationLat,
+        p.geoLocationLong, p.description, pt.name as propertyType,
+        c.name as country
         FROM properties as p
         LEFT JOIN usersProperties as up ON up.propertyId=p.id
         LEFT JOIN propertyTypes as pt ON pt.id=p.typeId
@@ -99,7 +101,8 @@ export default class PropertyHandler {
               title: req.body.title,
               numberOfBeds: parseInt(req.body.numberOfBeds, 10),
               address: req.body.address,
-              geoLocation: parseFloat(req.body.geoLocation),
+              geoLocationLat: parseFloat(req.body.geoLocationLat),
+              geoLocationLong: parseFloat(req.body.geoLocationLong),
               description: (req.body.description === undefined ||
                 req.body.description === '') ? null : req.body.description,
               typeId: parseInt(req.body.typeId, 10),
