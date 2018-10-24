@@ -40,10 +40,12 @@ module.exports.getMyProperties = () => {
 }
 
 module.exports.createProperty = (
-  title, numberOfBeds, address, geoLocation, description, typeId, countryId
+  title, numberOfBeds, address, geoLocationLat, geoLocationLong, description,
+  typeId, countryId
 ) => {
   const payload = {
-    title, numberOfBeds, address, geoLocation, description, typeId, countryId
+    title, numberOfBeds, address, geoLocationLat, geoLocationLong, description,
+    typeId, countryId
   };
 
   fetch(`${serverURL}api/v1/properties`, {
@@ -58,6 +60,7 @@ module.exports.createProperty = (
     if (data.error) { throw data.error; }
 
     console.log('Property created!');
+    confirm.log(data);
   })
   .catch(error => {
     console.error(error);
