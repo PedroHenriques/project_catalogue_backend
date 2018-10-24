@@ -16,9 +16,9 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db) {
   return(db.runSql(
-    `INSERT INTO properties (title, numberOfBeds, address,geoLocation,description,typeId,countryId)
-    VALUES ('property 1',2,'address 1',30.456,'this is property 1',1,1),
-    ('property 2',3,'address 2',10.2,null,2,2)`
+    `INSERT INTO properties (title,numberOfBeds,address,geoLocationLat,geoLocationLong,description,typeId,countryId)
+    VALUES ('property 1',2,'address 1',30.456,-5.79,'this is property 1',1,1),
+    ('property 2',3,'address 2',10.2,1.2,null,2,2)`
   ));
 };
 
