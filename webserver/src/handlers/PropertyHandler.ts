@@ -86,6 +86,18 @@ export default class PropertyHandler {
       }
       const userId = req.session.userId;
 
+      const property: IPropertyTableRow = {
+        title: req.body.title,
+        numberOfBeds: parseInt(req.body.numberOfBeds, 10),
+        address: req.body.address,
+        geoLocationLat: parseFloat(req.body.geoLocationLat),
+        geoLocationLong: parseFloat(req.body.geoLocationLong),
+        description: (req.body.description === undefined ||
+          req.body.description === '') ? null : req.body.description,
+        typeId: parseInt(req.body.typeId, 10),
+        countryId: parseInt(req.body.countryId, 10),
+      };
+
       dbConnection = await SqlFacade.connect();
       await new Promise((resolve, reject) => {
         if (dbConnection === undefined) {
@@ -97,18 +109,6 @@ export default class PropertyHandler {
           if (dbConnection === undefined) { return(reject()); }
 
           try {
-            const property: IPropertyTableRow = {
-              title: req.body.title,
-              numberOfBeds: parseInt(req.body.numberOfBeds, 10),
-              address: req.body.address,
-              geoLocationLat: parseFloat(req.body.geoLocationLat),
-              geoLocationLong: parseFloat(req.body.geoLocationLong),
-              description: (req.body.description === undefined ||
-                req.body.description === '') ? null : req.body.description,
-              typeId: parseInt(req.body.typeId, 10),
-              countryId: parseInt(req.body.countryId, 10),
-            };
-
             const insertedProperty = await SqlFacade.query(
               dbConnection,
               {
