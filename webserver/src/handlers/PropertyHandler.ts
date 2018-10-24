@@ -76,7 +76,10 @@ export default class PropertyHandler {
   public create = async (req: Request, res: Response): Promise<Response> => {
     let dbConnection: Connection | undefined;
     try {
-      const userId = '1';
+      if (req.session === undefined) {
+        throw Error('Failed to create a property due to missing session data.');
+      }
+      const userId = req.session.userId;
 
       dbConnection = await SqlFacade.connect();
       await new Promise((resolve, reject) => {
