@@ -140,7 +140,7 @@ export default class PropertyHandler {
         });
       });
 
-      return(res.status(201).json({}));
+      return(res.status(201).json({ property }));
     } catch (error) {
       logger.error({
         message: error.message,
