@@ -22,7 +22,8 @@ exports.up = function(db) {
       title VARCHAR(100) NOT NULL,
       numberOfBeds TINYINT(10) UNSIGNED NOT NULL,
       address VARCHAR(255) NOT NULL,
-      geoLocation FLOAT(10,6) NOT NULL,
+      geoLocationLat FLOAT(10,6) NOT NULL,
+      geoLocationLong FLOAT(10,6) NOT NULL,
       description VARCHAR(255) NULL
     ) ENGINE=InnoDB`
   ));
