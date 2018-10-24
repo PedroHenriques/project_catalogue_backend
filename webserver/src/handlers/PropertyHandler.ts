@@ -97,7 +97,8 @@ export default class PropertyHandler {
               numberOfBeds: parseInt(req.body.numberOfBeds, 10),
               address: req.body.address,
               geoLocation: parseFloat(req.body.geoLocation),
-              description: (req.body.description ? req.body.description : null),
+              description: (req.body.description === undefined ||
+                req.body.description === '') ? null : req.body.description,
               typeId: parseInt(req.body.typeId, 10),
               countryId: parseInt(req.body.countryId, 10),
             };
