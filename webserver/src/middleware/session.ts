@@ -18,7 +18,11 @@ export default async function session(
 
   const token = getCookie({ req, name: userAccountConfig.login.cookieName });
 
-  if (token !== null) {
+  if (token === null) {
+    logger.debug({
+      message: 'No Authentication cookie present in the request'
+    });
+  } else {
     const sessionTokenCacheKey = cacheKeyGenerator.sessionTokens({ token });
     const sessionData = await cache.getObject(
       sessionTokenCacheKey
@@ -65,6 +69,10 @@ export default async function session(
         logger.debug({ message: 'Added session data to Request' });
       }
     } else {
+      logger.debug({
+        message: 'Authentication failed due to incorrect credentials'
+      });
+
       return(
         clearCookie({ res, name: userAccountConfig.login.cookieName })
         .status(401)
