@@ -27,6 +27,8 @@ export default function validateAuthenticatedStatus(
         }));
       }
 
+      logger.debug({ message: 'Logged in status valid' });
+
       next();
     }
   );
