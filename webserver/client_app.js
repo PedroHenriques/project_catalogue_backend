@@ -2,12 +2,14 @@
 const fetch = require('node-fetch');
 
 const serverURL = 'http://localhost:8000/';
+let authSessionId = null;
 
 module.exports.getAllProperties = () => {
   fetch(`${serverURL}api/v1/properties`, {
     method: 'get',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
+      Cookie: authSessionId,
     },
   })
   .then(response => response.json())
@@ -26,6 +28,7 @@ module.exports.getMyProperties = () => {
     method: 'get',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
+      Cookie: authSessionId,
     },
   })
   .then(response => response.json())
@@ -52,6 +55,7 @@ module.exports.createProperty = (
     method: 'post',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
+      Cookie: authSessionId,
     },
     body: JSON.stringify(payload),
   })
@@ -76,6 +80,7 @@ module.exports.createUser = (email, password, name) => {
     method: 'post',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
+      Cookie: authSessionId,
     },
     body: JSON.stringify(payload),
   })
@@ -99,6 +104,7 @@ module.exports.activateUser = (email, token) => {
     method: 'post',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
+      Cookie: authSessionId,
     },
     body: JSON.stringify(payload),
   })
@@ -122,6 +128,7 @@ module.exports.lostPassword = (email) => {
     method: 'post',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
+      Cookie: authSessionId,
     },
     body: JSON.stringify(payload),
   })
@@ -145,6 +152,7 @@ module.exports.resetPassword = (email, token, password) => {
     method: 'post',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
+      Cookie: authSessionId,
     },
     body: JSON.stringify(payload),
   })
@@ -168,14 +176,41 @@ module.exports.login = (email, password) => {
     method: 'post',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
+      Cookie: authSessionId,
     },
     body: JSON.stringify(payload),
   })
-  .then(response => response.json())
+  .then(response => {
+    const headerCookie = response.headers[Object.getOwnPropertySymbols(response.headers)[0]]['set-cookie'];
+    const reMatches = headerCookie[0].match(/^([^;]+);/i);
+    if (reMatches !== null) {
+      authSessionId = reMatches[1];
+    }
+
+    return(response.json());
+  })
   .then(data => {
     if (data.error) { throw data.error; }
 
     console.log('logged in!');
+  })
+  .catch(error => {
+    console.error(error);
+  });
+}
+
+module.exports.logout = () => {
+  fetch(`${serverURL}api/v1/logout`, {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      Cookie: authSessionId,
+    },
+  })
+  .then(response => {
+    authSessionId = null;
+
+    return(response.json());
   })
   .catch(error => {
     console.error(error);
