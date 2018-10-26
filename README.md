@@ -15,6 +15,7 @@ A sample `Dockerfile` and `docker-compose` are available with this repo, but you
 
 **NOTES**
 
+. All emails sent will, in development mode, be sent to `http://localhost:8025`  
 . A test client application is available, in the `webserver/client_app.js` file, which allows an easy way to interact with the API. You can run this client via NodeJS environment.
 
 # API Endpoints
