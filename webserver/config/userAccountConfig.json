@@ -67,5 +67,22 @@
     },
 
     "pwResetRelUrl": "pwReset/"
+  },
+  
+  "resetPassword": {
+    "email": {
+      "from": {
+        "name": "project_catalogue",
+        "address": "project@catalogue.com"
+      },
+
+      "subject": "Project Catalogue - Password Changed",
+
+      "body": {
+        "plain": "The password for your account has been successfully changed, following a lost password request.\n\nIf you did not make this password change and would like to reset the password, please use the \"lost password\" functionality, available from the login screen.\n\nProject Catalogue.",
+
+        "html": "<p>The password for your account has been successfully changed, following a lost password request.</p><p>If you did not make this password change and would like to reset the password, please use the \"lost password\" functionality, available from the login screen.</p><p>Project Catalogue.</p>"
+      }
+    }
   }
 }
