@@ -600,6 +600,24 @@ export default class UserHandler {
         });
       });
 
+      (cache.getObject(
+        cacheKeyGenerator.userAccountConfig()
+      ) as Promise<IUserAccountConfig>)
+      .then(userAccountConfig => mailer.send({
+        ...userAccountConfig.resetPassword.email,
+        to: email,
+        body: {
+          ...userAccountConfig.resetPassword.email.body,
+          keywordReplacements: [],
+        },
+      }))
+      .catch(error => {
+        logger.error({
+          message: error.message,
+          payload: error,
+        });
+      });
+
       return(res.status(200).json({}));
     } catch (error) {
       logger.error({
