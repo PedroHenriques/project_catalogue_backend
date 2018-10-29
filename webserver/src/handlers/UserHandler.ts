@@ -374,25 +374,31 @@ export default class UserHandler {
         });
       });
 
-      const userAccountConfig = await cache.getObject(
-        cacheKeyGenerator.userAccountConfig()
-      ) as IUserAccountConfig;
+      Promise.all([
+        cache.getObject(
+          cacheKeyGenerator.userAccountConfig()
+        ) as Promise<IUserAccountConfig>,
+        this.getDomainUrl(),
+      ])
+      .then(promiseValues => {
+        const [userAccountConfig, domainUrl] = promiseValues;
 
-      const emailBodyReplacements: IEmailBodyReplacement[] = [
-        {
-          find: '\\|\\!LOGIN_URL\\!\\|',
-          replace: await this.getDomainUrl() +
-            userAccountConfig.accountActivation.loginRelUrl,
-        },
-      ];
+        const emailBodyReplacements: IEmailBodyReplacement[] = [
+          {
+            find: '\\|\\!LOGIN_URL\\!\\|',
+            replace: domainUrl +
+              userAccountConfig.accountActivation.loginRelUrl,
+          },
+        ];
 
-      mailer.send({
-        ...userAccountConfig.accountActivation.email,
-        to: email,
-        body: {
-          ...userAccountConfig.accountActivation.email.body,
-          keywordReplacements: emailBodyReplacements,
-        },
+        return(mailer.send({
+          ...userAccountConfig.accountActivation.email,
+          to: email,
+          body: {
+            ...userAccountConfig.accountActivation.email.body,
+            keywordReplacements: emailBodyReplacements,
+          },
+        }));
       })
       .catch(error => {
         logger.error({
