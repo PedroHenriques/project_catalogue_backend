@@ -244,22 +244,31 @@ export default class UserHandler {
         expire: userManagerConfig.accountRegistration.tokenDurationInSeconds,
       });
 
-      const emailBodyReplacements: IEmailBodyReplacement[] = [
-        {
-          find: '\\|\\!ACTIVATION_URL\\!\\|',
-          replace: await this.getDomainUrl() +
-            userManagerConfig.accountRegistration.activationRelUrl +
-            `?email=${encodeURI(email)}&token=${encodeURI(token)}`,
-        },
-      ];
+      this.getDomainUrl()
+      .then(domainUrl => {
+        const emailBodyReplacements: IEmailBodyReplacement[] = [
+          {
+            find: '\\|\\!ACTIVATION_URL\\!\\|',
+            replace: domainUrl +
+              userManagerConfig.accountRegistration.activationRelUrl +
+              `?email=${encodeURI(email)}&token=${encodeURI(token)}`,
+          },
+        ];
 
-      await mailer.send({
-        ...userManagerConfig.accountRegistration.email,
-        to: email,
-        body: {
-          ...userManagerConfig.accountRegistration.email.body,
-          keywordReplacements: emailBodyReplacements,
-        },
+        return(mailer.send({
+          ...userManagerConfig.accountRegistration.email,
+          to: email,
+          body: {
+            ...userManagerConfig.accountRegistration.email.body,
+            keywordReplacements: emailBodyReplacements,
+          },
+        }));
+      })
+      .catch(error => {
+        logger.error({
+          message: error.message,
+          payload: error,
+        });
       });
 
       return(res.status(201).json({}));
