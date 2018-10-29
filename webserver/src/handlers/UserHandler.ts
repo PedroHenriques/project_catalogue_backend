@@ -450,7 +450,7 @@ export default class UserHandler {
         },
       }) as { count: number }[];
 
-      if (emailCount.length === 0 || emailCount[0].count > 0) {
+      if (emailCount.length === 1 || emailCount[0].count > 0) {
         (cache.getObject(
           cacheKeyGenerator.userAccountConfig()
         ) as Promise<IUserAccountConfig>)
