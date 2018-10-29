@@ -454,37 +454,35 @@ export default class UserHandler {
         (cache.getObject(
           cacheKeyGenerator.userAccountConfig()
         ) as Promise<IUserAccountConfig>)
-        .then(async (userAccountConfig) => {
-          try {
-            const token = generateToken();
-            await this.storePendingPasswordReset({
+        .then(userAccountConfig => {
+          const token = generateToken();
+
+          return(
+            this.storePendingPasswordReset({
               email, token,
               expire: userAccountConfig.lostPassword.tokenDurationInSeconds,
-            });
+            })
+            .then(() => this.getDomainUrl())
+            .then((domainUrl) => {
+              const emailBodyReplacements: IEmailBodyReplacement[] = [
+                {
+                  find: '\\|\\!PW_RESET_URL\\!\\|',
+                  replace: domainUrl +
+                    userAccountConfig.lostPassword.pwResetRelUrl +
+                    `?email=${encodeURI(email)}&token=${encodeURI(token)}`,
+                },
+              ];
 
-            const emailBodyReplacements: IEmailBodyReplacement[] = [
-              {
-                find: '\\|\\!PW_RESET_URL\\!\\|',
-                replace: await this.getDomainUrl() +
-                  userAccountConfig.lostPassword.pwResetRelUrl +
-                  `?email=${encodeURI(email)}&token=${encodeURI(token)}`,
-              },
-            ];
-
-            await mailer.send({
-              ...userAccountConfig.lostPassword.email,
-              to: email,
-              body: {
-                ...userAccountConfig.lostPassword.email.body,
-                keywordReplacements: emailBodyReplacements,
-              },
-            });
-          } catch (error) {
-            logger.error({
-              message: error.message,
-              payload: error,
-            });
-          }
+              return(mailer.send({
+                ...userAccountConfig.lostPassword.email,
+                to: email,
+                body: {
+                  ...userAccountConfig.lostPassword.email.body,
+                  keywordReplacements: emailBodyReplacements,
+                },
+              }));
+            })
+          );
         })
         .catch(error => {
           logger.error({
