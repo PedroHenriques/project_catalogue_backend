@@ -59,6 +59,19 @@ export interface IUserAccountConfig {
     },
     pwResetRelUrl: string,
   },
+  resetPassword: {
+    email: {
+      from: {
+        name: string,
+        address: string,
+      },
+      subject: string,
+      body: {
+        plain: string,
+        html: string,
+      },
+    },
+  },
 }
 
 export interface IUsersPendingActivation {
