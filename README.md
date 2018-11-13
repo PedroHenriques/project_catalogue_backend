@@ -1,5 +1,13 @@
 # Sample Property Listing/Browsing Web Application - Project Catalogue - Backend
 
+## Context
+
+This repository was built as part of a code challenge to build an application (back and front end), using NodeJS on the backend and React+Redux on the frontend.  
+
+This repository was built in roughly 12h from scratch, which means no TDD and the code organization is not always ideal.  
+
+The frontend counterpart of this repo can be found at [https://github.com/PedroHenriques/project_catalogue_frontend](https://github.com/PedroHenriques/project_catalogue_frontend).
+
 ## Setup - Production mode
 
 A sample `Dockerfile` and `docker-compose` are available with this repo, but you'll need to adjust it to your production needs and architecture.
